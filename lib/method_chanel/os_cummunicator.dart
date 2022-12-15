@@ -1,6 +1,6 @@
 import 'freelance_platform_interface.dart';
 
-class Freelance {
+class OSCommunicator {
   static Future<String?> getPlatformVersion() {
     return FreelancePlatform.instance.getPlatformVersion();
   }
