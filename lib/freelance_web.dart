@@ -6,7 +6,7 @@ import 'dart:html' as html show window;
 
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
-import 'method_chanel/freelance_platform_interface.dart';
+import 'freelance_platform_interface.dart';
 
 /// A web implementation of the FreelancePlatform of the Freelance plugin.
 class FreelanceWeb extends FreelancePlatform {
