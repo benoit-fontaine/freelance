@@ -8,8 +8,12 @@ environment:
   flutter: ">=2.5.0"
 
 dependencies:
+  bloc: ^8.1.1
+  equatable: ^2.0.5
+  firebase_storage: ^11.0.16
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.1.2
   flutter_markdown: ^0.6.14
   flutter_web_plugins:
     sdk: flutter
@@ -51,7 +55,7 @@ flutter:
         pluginClass: FreelancePluginCApi
       web:
         pluginClass: FreelanceWeb
-        fileName: freelance_web.dart
+        fileName: method_channels/freelance_web.dart
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

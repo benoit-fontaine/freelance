@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
+enum ScreenType { desktop, tablet, handset, watch}
+
 extension MaterialSizeRatio on Size {
-  SizeOrientation  get orientation {
-    if (width > height) {
-      return SizeOrientation.paysage;
-    }
-    if (height > width) {
-      return SizeOrientation.portrait;
-    }
-    return SizeOrientation.carre;
+  ScreenType get screenType {
+    if (shortestSide > 900) return ScreenType.desktop;
+    if (shortestSide > 600) return ScreenType.tablet;
+    if (shortestSide > 300) return ScreenType.handset;
+    return ScreenType.watch;
   }
 
   double get max => (height > width) ? height : width;
@@ -18,10 +17,4 @@ extension MaterialSizeRatio on Size {
   double get vmin => min/100;
   double get vwidth => width/100;
   double get vheight => height/100;
-}
-
-enum SizeOrientation {
-  portrait,
-  paysage,
-  carre
 }

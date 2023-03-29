@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:freelance/freelance.dart';
-import 'package:freelance/freelance_platform_interface.dart';
-import 'package:freelance/freelance_method_channel.dart';
+import 'package:freelance/method_channels/freelance.dart';
+import 'package:freelance/method_channels/freelance_platform_interface.dart';
+import 'package:freelance/method_channels/freelance_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 class MockFreelancePlatform

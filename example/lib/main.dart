@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:freelance/freelance.dart';
+import 'package:freelance/method_channels/freelance.dart';
 
 void main() {
   runApp(const MyApp());
