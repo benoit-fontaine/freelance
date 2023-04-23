@@ -3,6 +3,8 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:freelance/method_channels/freelance.dart';
+import 'package:freelance/widgets/profile/login_form.dart';
+import 'package:freelance/widgets/profile/profile_resumed.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,8 +33,8 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      platformVersion =
-          await _freelancePlugin.getPlatformVersion() ?? 'Unknown platform version';
+      platformVersion = await _freelancePlugin.getPlatformVersion() ??
+          'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -52,10 +54,71 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: Text(
+              'Running on $_platformVersion',
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.black),
+          ),
+          backgroundColor: const Color.fromRGBO(255, 255, 255, .2),
+          shadowColor: const Color.fromRGBO(255, 255, 255, 0),
+          centerTitle: true,
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: const Icon(Icons.menu, color: Colors.black,),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer(); // Ouvrir le Drawer
+                },
+                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+              );
+            },
+          ),
+        ),
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              const DrawerHeader(
+                decoration: BoxDecoration(color: Colors.blue),
+                child: Text(
+                  'Menu',
+                  style: TextStyle(color: Colors.white, fontSize: 24),
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.home),
+                title: Text('Accueil'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.settings),
+                title: Text('Paramètres'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.logout),
+                title: Text('Déconnexion'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: SizedBox(
+            width: 305,
+            child: LoginForm(
+              title: "Connectez-vous",
+              goForgivenPassword: () {},
+              doLogin: (usr, pwd) {},
+              goSubscribe: () {},
+              errorMessage: "Une erreur est survenue durant l'appel à l'authentification",
+            )
+          ),
         ),
       ),
     );

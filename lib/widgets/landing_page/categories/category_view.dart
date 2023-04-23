@@ -38,16 +38,18 @@ class _CategoryViewState extends State<CategoryView>
 
   @override
   Widget build(BuildContext context) {
+    bool portrait = (context.mediaSize.width >= context.mediaSize.height);
     return Hero(
       tag: widget.category.backgroundTag,
       child: Container(
         width: context.mediaSize.width,
         height: context.mediaSize.height,
         decoration: BoxDecoration(
-            image: DecorationImage(
-          image: widget.category.backgroundImage,
-          fit: BoxFit.cover,
-        )),
+          image: DecorationImage(
+            image: widget.category.backgroundImage,
+            fit: BoxFit.cover,
+          ),
+        ),
         child: FadeTransition(
           opacity: _animation,
           child: Card(
@@ -58,22 +60,30 @@ class _CategoryViewState extends State<CategoryView>
               top: 30,
             ),
             color: const Color.fromRGBO(0, 0, 0, 0.6),
-            child: Column(
+            child: Flex(
+              direction: portrait ? Axis.horizontal : Axis.vertical,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TitleView(
-                    tag: widget.category.titleTag,
-                    title: widget.category.title),
-                SizedBox(
-                  width: context.mediaSize.width - 32,
-                  height: context.mediaSize.vheight * 50,
-                  child: MarkdownIt(
-                    data: widget.category.markdownDescription,
-                    fontColor: Colors.white,
-                  ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    TitleView(
+                      tag: widget.category.titleTag,
+                      title: widget.category.title,
+                    ),
+                    SizedBox(
+                      width: context.mediaSize.width - 32,
+                      height: context.mediaSize.height * .4,
+                      child: MarkdownIt(
+                        data: widget.category.markdownDescription,
+                        fontColor: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
                 Container(
                   width: context.mediaSize.width - 32,
-                  height: context.mediaSize.vheight * 50 - 134,
+                  height: context.mediaSize.height * .6 - 134,
                   alignment: AlignmentDirectional.bottomCenter,
                   child: widget.footer,
                 ),
