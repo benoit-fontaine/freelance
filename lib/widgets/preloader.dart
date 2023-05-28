@@ -70,6 +70,9 @@ class _PreloaderState extends State<Preloader> {
     final List<Reference> refs = widget.firebaseRefs ?? [];
     final List<String> assets = widget.imageAssets ?? [];
     final List<String> urls = widget.imageUrls ?? [];
+    setState(() {
+      _total = refs.length + assets.length + urls.length;
+    });
     for (Reference ref in refs) {
       await preloadRef(ref);
       setState(() {

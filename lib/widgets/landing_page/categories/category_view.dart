@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:freelance/extensions/context_extensions.dart';
-import 'package:freelance/extensions/size_extensions.dart';
 import 'package:freelance/widgets/markdown_it.dart';
 
 import 'category_model.dart';
