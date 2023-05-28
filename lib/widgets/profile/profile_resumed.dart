@@ -48,7 +48,7 @@ class ProfileResumed extends StatelessWidget {
               ),
               const Separator(),
               WhiteButton(label: "Votre espace", onClick: goProfile),
-              WhiteButton(label: "Se déconnecter", onClick: goProfile),
+              WhiteButton(label: "Se déconnecter", onClick: logout),
             ],
           ),
         ),
