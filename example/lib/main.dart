@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:freelance/method_channels/freelance.dart';
 import 'package:freelance/widgets/profile/login_form.dart';
-import 'package:freelance/widgets/profile/profile_resumed.dart';
 
 void main() {
   runApp(const MyApp());
@@ -85,22 +84,22 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
               ListTile(
-                leading: Icon(Icons.home),
-                title: Text('Accueil'),
+                leading: const Icon(Icons.home),
+                title: const Text('Accueil'),
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
               ListTile(
-                leading: Icon(Icons.settings),
-                title: Text('Paramètres'),
+                leading: const Icon(Icons.settings),
+                title: const Text('Paramètres'),
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
               ListTile(
-                leading: Icon(Icons.logout),
-                title: Text('Déconnexion'),
+                leading: const Icon(Icons.logout),
+                title: const Text('Déconnexion'),
                 onTap: () {
                   Navigator.pop(context);
                 },
