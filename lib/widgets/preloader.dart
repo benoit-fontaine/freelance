@@ -124,14 +124,29 @@ class ProgressIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
+      height: double.infinity,
       alignment: Alignment.center,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+      ),
       padding: const EdgeInsets.all(20),
-      child: SizedBox(
-        width: 80 * context.mediaSize.vwidth,
-        height: 25,
-        child: LinearProgressIndicator(
-          value: value,
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 40,
+            child: CircularProgressIndicator(
+              value: value,
+            ),
+          ),
+          Text("Chargement en cours...",
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(color: Colors.black)),
+        ],
       ),
     );
   }
