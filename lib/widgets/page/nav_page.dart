@@ -69,11 +69,31 @@ class NavPage extends StatelessWidget {
         ),
       ),
       body: child,
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: menu,
-        ),
+      drawer: NavigationDrawer(
+        onDestinationSelected: (selectedItem) =>
+            context.push(navItems[selectedItem].navDestination),
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(28, 16, 16, 10),
+            child: Text(
+              'Menu',
+              style: Theme.of(context)
+                  .textTheme
+                  .displayMedium
+                  ?.copyWith(color: Colors.white, fontSize: 24),
+            ),
+          ),
+          ...navItems.map(
+            (navItem) => NavigationDrawerDestination(
+              icon: Icon(navItem.icon),
+              label: Text(navItem.name),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
+            child: Divider(),
+          ),
+        ],
       ),
     );
   }
