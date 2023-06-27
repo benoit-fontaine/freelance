@@ -3,13 +3,14 @@ import 'package:freelance/extensions/context_extensions.dart';
 import 'package:freelance/extensions/size_extensions.dart';
 import 'package:freelance/widgets/landing_page/categories/category_view.dart';
 
+import '../components/detail_widget.dart';
+import '../components/separator_begin.dart';
+import '../components/separator_end.dart';
 import 'category_model.dart';
-
-typedef DetailWidget = Widget Function(CategoryModel category);
 
 class CategoriesList extends StatelessWidget {
   final List<CategoryModel> categories;
-  final DetailWidget categoryWidget; 
+  final DetailWidget<CategoryModel> categoryWidget; 
 
   const CategoriesList({
     Key? key,
@@ -98,73 +99,5 @@ class CategoriesList extends StatelessWidget {
               ))
           .toList(),
     );
-  }
-}
-
-class SeparatorEnd extends StatelessWidget {
-  final bool isPortrait;
-
-  const SeparatorEnd({
-    Key? key,
-    required this.isPortrait,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    if (isPortrait) {
-      return Positioned(
-        bottom: 0,
-        top: 0,
-        right: 0,
-        child: Container(
-          width: 2,
-          color: Colors.white,
-        ),
-      );
-    } else {
-      return Positioned(
-        bottom: 0,
-        left: 0,
-        right: 0,
-        child: Container(
-          height: 2,
-          color: Colors.white,
-        ),
-      );
-    }
-  }
-}
-
-class SeparatorBegin extends StatelessWidget {
-  final bool isPortrait;
-
-  const SeparatorBegin({
-    Key? key,
-    required this.isPortrait,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    if (isPortrait) {
-      return Positioned(
-        bottom: 0,
-        top: 0,
-        left: 0,
-        child: Container(
-          width: 2,
-          color: Colors.white,
-        ),
-      );
-    } else {
-      return Positioned(
-        top: 0,
-        left: 0,
-        right: 0,
-        child: Container(
-          height: 2,
-          color: Colors.white,
-        ),
-      );
-    }
   }
 }

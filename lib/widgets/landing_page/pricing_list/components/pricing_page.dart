@@ -2,24 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:freelance/extensions/context_extensions.dart';
 import 'package:freelance/widgets/markdown_it.dart';
 
-import '../components/title_view.dart';
-import 'category_model.dart';
+import '../../components/title_view.dart';
+import '../model/pricing_data.dart';
+import '../model/pricing_data_extensions.dart';
 
-class CategoryView extends StatefulWidget {
-  final CategoryModel category;
-  final Widget footer;
+class PricingPage extends StatefulWidget {
+  final PricingData data;
+  final Widget? footer;
 
-  const CategoryView({
+  const PricingPage({
     Key? key,
-    required this.category,
-    required this.footer,
+    required this.data,
+    this.footer,
   }) : super(key: key);
 
   @override
-  State<CategoryView> createState() => _CategoryViewState();
+  State<PricingPage> createState() => _PricingPageState();
 }
 
-class _CategoryViewState extends State<CategoryView>
+class _PricingPageState extends State<PricingPage>
     with TickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
     duration: const Duration(milliseconds: 700),
@@ -38,15 +39,14 @@ class _CategoryViewState extends State<CategoryView>
 
   @override
   Widget build(BuildContext context) {
-    bool portrait = (context.mediaSize.width >= context.mediaSize.height);
     return Hero(
-      tag: widget.category.backgroundTag,
+      tag: widget.data.backgroundTag,
       child: Container(
         width: context.mediaSize.width,
         height: context.mediaSize.height,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: widget.category.backgroundImage,
+            image: widget.data.backgroundImage,
             fit: BoxFit.cover,
           ),
         ),
@@ -60,22 +60,21 @@ class _CategoryViewState extends State<CategoryView>
               top: 30,
             ),
             color: const Color.fromRGBO(0, 0, 0, 0.6),
-            child: Flex(
-              direction: portrait ? Axis.horizontal : Axis.vertical,
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     TitleView(
-                      tag: widget.category.titleTag,
-                      title: widget.category.title,
+                      tag: widget.data.titleTag,
+                      title: widget.data.title,
                     ),
                     SizedBox(
                       width: context.mediaSize.width - 32,
                       height: context.mediaSize.height * .4,
                       child: MarkdownIt(
-                        data: widget.category.markdownDescription,
+                        data: widget.data.markdownDescription,
                         fontColor: Colors.white,
                       ),
                     ),
