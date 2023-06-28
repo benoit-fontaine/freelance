@@ -3,7 +3,6 @@ import 'package:freelance/extensions/context_extensions.dart';
 import 'package:freelance/extensions/size_extensions.dart';
 import 'package:freelance/widgets/landing_page/components/divided_screen.dart';
 import 'package:freelance/widgets/landing_page/pricing_list/components/pricing_amount.dart';
-import 'package:nil/nil.dart';
 
 import '../components/detail_widget.dart';
 import '../components/separator_begin.dart';

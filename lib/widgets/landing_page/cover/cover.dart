@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:freelance/widgets/landing_page/cover/components/bottom_widgets.dart';
 import 'package:freelance/widgets/nullable_widget.dart';
-import 'package:nil/nil.dart';
 
 import 'components/background_image.dart';
 import 'components/first_plan.dart';
-import 'components/store_link_list.dart';
 import 'model/store_link_data.dart';
 
 class Cover extends StatelessWidget {
@@ -12,6 +11,7 @@ class Cover extends StatelessWidget {
   final Widget? title;
   final Widget? bottom;
   final List<StoreLinkData> storeLinks;
+  final String description;
 
   const Cover({
     super.key,
@@ -19,6 +19,7 @@ class Cover extends StatelessWidget {
     this.title,
     this.bottom,
     this.storeLinks = const [],
+    this.description = "",
   });
 
   @override
@@ -35,15 +36,14 @@ class Cover extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20),
             child: NullableWidget(widget: title),
           ),
-          Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                NullableWidget(widget: bottom),
-                StoreLinkList(links: storeLinks),
-              ].where((element) => element != nil).toList()),
+          BottomWidgets(
+            bottom: bottom,
+            description: description,
+            storeLinks: storeLinks,
+          ),
         ]),
       ],
     );
   }
 }
+
