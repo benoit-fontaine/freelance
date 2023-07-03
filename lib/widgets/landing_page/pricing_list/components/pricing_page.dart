@@ -1,3 +1,4 @@
+import 'package:animator/animator.dart';
 import 'package:flutter/material.dart';
 import 'package:freelance/extensions/context_extensions.dart';
 import 'package:freelance/widgets/markdown_it.dart';
@@ -30,6 +31,11 @@ class _PricingPageState extends State<PricingPage>
     parent: _controller,
     curve: Curves.easeIn,
   );
+  late final Animation<double> _animation2 = CurvedAnimation(
+    parent: _controller,
+    curve: Curves.easeIn,
+  );
+  bool finished = false;
 
   @override
   void dispose() {
@@ -39,6 +45,14 @@ class _PricingPageState extends State<PricingPage>
 
   @override
   Widget build(BuildContext context) {
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        setState(() {
+          finished = true;
+        });
+      }
+    });
+
     return Hero(
       tag: widget.data.backgroundTag,
       child: Container(
@@ -80,12 +94,18 @@ class _PricingPageState extends State<PricingPage>
                     ),
                   ],
                 ),
-                Container(
-                  width: context.mediaSize.width - 32,
-                  height: context.mediaSize.height * .6 - 134,
-                  alignment: AlignmentDirectional.bottomCenter,
-                  child: widget.footer,
-                ),
+                finished
+                    ? Animator<double>(
+                        builder: (_, animatorState, __) => Opacity(
+                              opacity: animatorState.value,
+                              child: Container(
+                                width: context.mediaSize.width - 32,
+                                height: context.mediaSize.height * .6 - 134,
+                                alignment: AlignmentDirectional.bottomCenter,
+                                child: widget.footer,
+                              ),
+                            ))
+                    : Container(),
               ],
             ),
           ),
