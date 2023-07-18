@@ -1,125 +1,45 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
+import 'package:freelance/widgets/components/gridview_selectable_number_card.dart';
+import 'package:freelance_example/component_tester.dart';
 
-import 'package:flutter/services.dart';
-import 'package:freelance/method_channels/freelance.dart';
-import 'package:freelance/widgets/profile/login_form.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const StatefulTester());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class StatefulTester extends StatefulWidget {
+  const StatefulTester({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<StatefulTester> createState() => _StatefulTesterState();
 }
 
-class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  final _freelancePlugin = Freelance();
-
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      platformVersion = await _freelancePlugin.getPlatformVersion() ??
-          'Unknown platform version';
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
-  }
-
+class _StatefulTesterState extends State<StatefulTester> {
+  List<NumberCardValue<String>> values = [
+    NumberCardValue<String>(title: "test 1", quantity: 0, isSelected: false, value: "1", image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrspUTrNQOTnGv-QgTqGr14-mM3eoIJxJkJw&usqp=CAU")),
+    NumberCardValue<String>(title: "test 2", quantity: 0, isSelected: false, value: "2"),
+    NumberCardValue<String>(title: "test 3", quantity: 0, isSelected: false, value: "3"),
+    NumberCardValue<String>(title: "test 4", quantity: 0, isSelected: false, value: "4"),
+    NumberCardValue<String>(title: "test 5", quantity: 0, isSelected: false, value: "5"),
+    NumberCardValue<String>(title: "test 6", quantity: 0, isSelected: false, value: "6"),
+    NumberCardValue<String>(title: "test 7", quantity: 0, isSelected: false, value: "7"),
+    NumberCardValue<String>(title: "test 8", quantity: 0, isSelected: false, value: "8"),
+    NumberCardValue<String>(title: "test 9", quantity: 0, isSelected: false, value: "9"),
+    NumberCardValue<String>(title: "test 10", quantity: 0, isSelected: false, value: "10"),
+  ];
+  
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-              'Running on $_platformVersion',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.black),
-          ),
-          backgroundColor: const Color.fromRGBO(255, 255, 255, .2),
-          shadowColor: const Color.fromRGBO(255, 255, 255, 0),
-          centerTitle: true,
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(Icons.menu, color: Colors.black,),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer(); // Ouvrir le Drawer
-                },
-                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-              );
-            },
-          ),
+    return WidgetTester(
+        child: GridViewSelectableNumberCard(
+          values: values,
+          onChange: (index, quantity, isSelected) {
+            setState(() {
+              values[index].quantity = quantity;
+              values[index].isSelected = isSelected;
+            });
+          }
         ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(color: Colors.blue),
-                child: Text(
-                  'Menu',
-                  style: TextStyle(color: Colors.white, fontSize: 24),
-                ),
-              ),
-              ListTile(
-                leading: const Icon(Icons.home),
-                title: const Text('Accueil'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.settings),
-                title: const Text('Paramètres'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.logout),
-                title: const Text('Déconnexion'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-        ),
-        body: Center(
-          child: SizedBox(
-            width: 305,
-            child: LoginForm(
-              title: "Connectez-vous",
-              goForgivenPassword: () {},
-              doLogin: (usr, pwd) {},
-              goSubscribe: () {},
-              errorMessage: "Une erreur est survenue durant l'appel à l'authentification",
-            )
-          ),
-        ),
-      ),
     );
   }
 }
