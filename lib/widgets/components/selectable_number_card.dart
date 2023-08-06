@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:freelance/extensions/context_extensions.dart';
+import 'package:freelance/widgets/components/plus_moins_value.dart';
 
 typedef OnChangeSelectionAndNumber = void Function(int value, bool isSelected);
 
@@ -21,6 +21,7 @@ class SelectableNumberCard extends StatelessWidget {
 
   static const double _selectedElevation = 1.0;
   static const double _notSelectedElevation = 8.0;
+  static const Color _selectedColor = Color.fromRGBO(0, 0, 0, .1);
 
   @override
   Widget build(BuildContext context) {
@@ -38,17 +39,18 @@ class SelectableNumberCard extends StatelessWidget {
             onChange(value, !isSelected);
           },
           child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            padding: const EdgeInsets.all(0),
+            margin: const EdgeInsets.all(0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),
-              color: isSelected ? Colors.black.withOpacity(0.3) : null,
+              color: isSelected ? _selectedColor : null,
               image: backgroundImage != null
                   ? DecorationImage(
                       image: backgroundImage!,
                       fit: BoxFit.cover,
                       colorFilter: isSelected
-                          ? ColorFilter.mode(
-                              Colors.black.withOpacity(0.3),
+                          ? const ColorFilter.mode(
+                              _selectedColor,
                               BlendMode.srcOver,
                             )
                           : null,
@@ -58,37 +60,11 @@ class SelectableNumberCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        if (value > 0) {
-                          onChange(value - 1, isSelected);
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: const CircleBorder(),
-                        padding: const EdgeInsets.all(-5.0),
-                      ),
-                      child: const Text("-"),
-                    ),
-                    Text(
-                      value.toString(),
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        onChange(value + 1, isSelected);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: const CircleBorder(),
-                        padding: const EdgeInsets.all(-5.0),
-                      ),
-                      child: const Text("+"),
-                    ),
-                  ],
-                ),
+                PlusMoinsValue(
+                    value: value,
+                    onChange: (value) {
+                      onChange(value, isSelected);
+                    }),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [

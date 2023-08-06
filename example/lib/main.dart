@@ -1,45 +1,75 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:freelance/widgets/components/gridview_selectable_number_card.dart';
-import 'package:freelance_example/component_tester.dart';
-
+import 'package:flutter/services.dart';
+import 'package:freelance/widgets/markdown_it.dart';
+import 'package:freelance_example/components/selectable_number_card.dart';
+import 'package:freelance_example/components/widgetbook.dart';
+import 'package:widgetbook/widgetbook.dart';
 
 void main() {
-  runApp(const StatefulTester());
+  runApp(const HotReload());
 }
 
-class StatefulTester extends StatefulWidget {
-  const StatefulTester({super.key});
+class HotReload extends StatelessWidget {
+  const HotReload({Key? key}) : super(key: key);
 
-  @override
-  State<StatefulTester> createState() => _StatefulTesterState();
-}
-
-class _StatefulTesterState extends State<StatefulTester> {
-  List<NumberCardValue<String>> values = [
-    NumberCardValue<String>(title: "test 1", quantity: 0, isSelected: false, value: "1", image: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrspUTrNQOTnGv-QgTqGr14-mM3eoIJxJkJw&usqp=CAU")),
-    NumberCardValue<String>(title: "test 2", quantity: 0, isSelected: false, value: "2"),
-    NumberCardValue<String>(title: "test 3", quantity: 0, isSelected: false, value: "3"),
-    NumberCardValue<String>(title: "test 4", quantity: 0, isSelected: false, value: "4"),
-    NumberCardValue<String>(title: "test 5", quantity: 0, isSelected: false, value: "5"),
-    NumberCardValue<String>(title: "test 6", quantity: 0, isSelected: false, value: "6"),
-    NumberCardValue<String>(title: "test 7", quantity: 0, isSelected: false, value: "7"),
-    NumberCardValue<String>(title: "test 8", quantity: 0, isSelected: false, value: "8"),
-    NumberCardValue<String>(title: "test 9", quantity: 0, isSelected: false, value: "9"),
-    NumberCardValue<String>(title: "test 10", quantity: 0, isSelected: false, value: "10"),
-  ];
-  
   @override
   Widget build(BuildContext context) {
-    return WidgetTester(
-        child: GridViewSelectableNumberCard(
-          values: values,
-          onChange: (index, quantity, isSelected) {
-            setState(() {
-              values[index].quantity = quantity;
-              values[index].isSelected = isSelected;
-            });
-          }
-        ),
+    return Widgetbook.material(
+      initialRoute: "/?path=readme%2Fintroduction",
+      addons: [
+        DeviceFrameAddon(devices: [
+          Devices.android.smallPhone,
+          Devices.android.samsungGalaxyS20,
+          Devices.ios.iPhone13ProMax,
+          Devices.ios.iPhoneSE,
+          Devices.linux.laptop,
+          Devices.windows.wideMonitor,
+        ]),
+      ],
+      directories: [
+        WidgetbookComponent(name: "README", useCases: [
+          WidgetbookUseCase(
+            name: "Introduction",
+            builder: (BuildContext context) {
+              return const LecteurMD(
+                data: "${kDebugMode ? "" : "assets/"}markdown/introduction.md",
+                fontColor: Colors.white,
+              );
+            },
+          ),
+        ]),
+        WidgetbookFolder(name: "Widgets", children: [
+          ...componentCategories(context),
+        ]),
+      ],
     );
+  }
+}
+
+class LecteurMD extends StatefulWidget {
+  final String data;
+  final Color fontColor;
+
+  const LecteurMD({super.key, required this.data, required this.fontColor});
+
+  @override
+  State<LecteurMD> createState() => _LecteurMDState();
+}
+
+class _LecteurMDState extends State<LecteurMD> {
+  String _data = "";
+
+  @override
+  void initState() {
+    super.initState();
+    rootBundle.loadString(widget.data).then((value) => setState(() {
+          _data = value;
+        }));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MarkdownIt(data: _data, fontColor: widget.fontColor);
   }
 }
