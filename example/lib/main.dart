@@ -1,8 +1,9 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:freelance/widgets/markdown_it.dart';
-import 'package:freelance_example/components/selectable_number_card.dart';
 import 'package:freelance_example/components/widgetbook.dart';
 import 'package:widgetbook/widgetbook.dart';
 
@@ -19,10 +20,8 @@ class HotReload extends StatelessWidget {
       initialRoute: "/?path=readme%2Fintroduction",
       addons: [
         DeviceFrameAddon(devices: [
-          Devices.android.smallPhone,
-          Devices.android.samsungGalaxyS20,
-          Devices.ios.iPhone13ProMax,
-          Devices.ios.iPhoneSE,
+          ...Devices.android.all,
+          ...Devices.ios.all,
           Devices.linux.laptop,
           Devices.windows.wideMonitor,
         ]),

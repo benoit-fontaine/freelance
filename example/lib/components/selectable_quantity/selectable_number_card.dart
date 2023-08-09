@@ -1,10 +1,12 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:freelance/widgets/components/selectable_number_card.dart';
 import 'package:widgetbook/widgetbook.dart';
 
 WidgetbookComponent selectableNumberCard(BuildContext context) {
   return WidgetbookComponent(
-    name: "Carte sélectionnable",
+    name: "Carte",
     useCases: [
       WidgetbookUseCase(
         name: "avec image de fond",
