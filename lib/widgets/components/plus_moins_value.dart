@@ -28,6 +28,8 @@ class PlusMoinsValue extends StatelessWidget {
                 }
               },
               style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(0),
+                alignment: Alignment.center,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(15),
@@ -38,8 +40,7 @@ class PlusMoinsValue extends StatelessWidget {
                 "-",
                 style: Theme.of(context)
                     .textTheme
-                    .headlineSmall
-                    ?.copyWith(color: Colors.white),
+                    .headlineSmall,
               ),
             ),
           ),
@@ -54,6 +55,8 @@ class PlusMoinsValue extends StatelessWidget {
                 onChange(value + 1);
               },
               style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(0),
+                alignment: Alignment.center,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                     topRight: Radius.circular(15),
@@ -64,8 +67,8 @@ class PlusMoinsValue extends StatelessWidget {
                 "+",
                 style: Theme.of(context)
                     .textTheme
-                    .headlineSmall
-                    ?.copyWith(color: Colors.white),
+                    .headlineSmall,
+                textAlign: TextAlign.center,
               ),
             ),
           ),

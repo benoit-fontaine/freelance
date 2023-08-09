@@ -1,5 +1,5 @@
-name: freelance_example
-description: Demonstrates how to use the freelance plugin.
+name: freelance_package
+description: Mes outils pour réalisé plus vite des applications multi-plateformes.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -16,6 +16,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_web_plugins:
+      sdk: flutter
 
   freelance:
     # When depending on this package from a real application you should use:
@@ -28,6 +30,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  google_fonts: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +56,7 @@ flutter:
   assets:
       - assets/images/
       - assets/markdown/
+      - assets/markdown/forms/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

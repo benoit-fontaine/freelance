@@ -36,6 +36,8 @@ class GridViewSelectableNumberCard<T> extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: context.mediaSize.width ~/ 150,
           mainAxisSpacing: 8.0,

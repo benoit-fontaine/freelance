@@ -1,13 +1,14 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:freelance/widgets/markdown_it.dart';
-import 'package:freelance_example/components/widgetbook.dart';
 import 'package:widgetbook/widgetbook.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
+
+import 'components/widgetbook.dart';
+import 'usecase_with_markdown.dart';
 
 void main() {
+  usePathUrlStrategy();
   runApp(const HotReload());
 }
 
@@ -17,7 +18,7 @@ class HotReload extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Widgetbook.material(
-      initialRoute: "/?path=readme%2Fintroduction",
+      initialRoute: "/?path=%2Freadme",
       addons: [
         DeviceFrameAddon(devices: [
           ...Devices.android.all,
@@ -27,48 +28,15 @@ class HotReload extends StatelessWidget {
         ]),
       ],
       directories: [
-        WidgetbookComponent(name: "README", useCases: [
-          WidgetbookUseCase(
-            name: "Introduction",
-            builder: (BuildContext context) {
-              return const LecteurMD(
-                data: "${kDebugMode ? "" : "assets/"}markdown/introduction.md",
-                fontColor: Colors.white,
-              );
-            },
+        WidgetbookComponent(name: "", useCases: [
+          usercaseWithMarkdown(
+            "README",
+            null,
+            "markdown/introduction.md",
           ),
         ]),
-        WidgetbookFolder(name: "Widgets", children: [
-          ...componentCategories(context),
-        ]),
+        ...componentCategories(context),
       ],
     );
-  }
-}
-
-class LecteurMD extends StatefulWidget {
-  final String data;
-  final Color fontColor;
-
-  const LecteurMD({super.key, required this.data, required this.fontColor});
-
-  @override
-  State<LecteurMD> createState() => _LecteurMDState();
-}
-
-class _LecteurMDState extends State<LecteurMD> {
-  String _data = "";
-
-  @override
-  void initState() {
-    super.initState();
-    rootBundle.loadString(widget.data).then((value) => setState(() {
-          _data = value;
-        }));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MarkdownIt(data: _data, fontColor: widget.fontColor);
   }
 }

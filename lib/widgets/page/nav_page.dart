@@ -7,6 +7,7 @@ class NavPage extends StatelessWidget {
   final bool forceMenu;
   final List<NavItem> navItems;
   final Widget child;
+  final List<Widget> actions;
 
   const NavPage({
     Key? key,
@@ -14,6 +15,7 @@ class NavPage extends StatelessWidget {
     required this.forceMenu,
     required this.navItems,
     required this.child,
+    this.actions = const [],
   }) : super(key: key);
 
   @override

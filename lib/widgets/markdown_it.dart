@@ -17,15 +17,17 @@ class MarkdownIt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Markdown(
-        data: data,
-        styleSheet: getMDTheme(context, Colors.white),
-        onTapLink: (text, url, title) {
-          if (url != null) {
-            launchUrl(
-              Uri.parse(url),
-              mode: LaunchMode.platformDefault,
-            );
-          }
-        });
+      data: data,
+      styleSheet: getMDTheme(context, Colors.white),
+      onTapLink: (text, url, title) {
+        if (url != null) {
+          launchUrl(
+            Uri.parse(url),
+            mode: LaunchMode.platformDefault,
+          );
+        }
+      },
+      selectable: true,
+    );
   }
 }
