@@ -30,14 +30,6 @@ class BottomWidgets extends StatelessWidget {
           StoreLinkList(links: storeLinks),
         ],
       );
-        
-        Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            NullableWidget(widget: bottom),
-            StoreLinkList(links: storeLinks),
-          ].where((element) => element != nil).toList());
     }
     return FilteredColumn(
       children: [

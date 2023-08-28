@@ -15,7 +15,7 @@ class PricingAmount extends StatelessWidget {
   Widget build(BuildContext context) {
     var f = NumberFormat.currency(locale: "fr_FR", decimalDigits: 0, symbol: "€");
     
-    if (!isVisible) {
+    if (!isVisible || amount <= 0) {
       return Text("");
     }
     
