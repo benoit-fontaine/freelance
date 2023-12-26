@@ -4,6 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   firebase_core
+  firebase_storage
   freelance
   url_launcher_windows
 )
