@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:freelance/extensions/context_extensions.dart';
-import 'package:freelance/extensions/size_extensions.dart';
 
 typedef ErrorEvent = void Function(Exception e);
 typedef SuccessEvent = void Function();
+typedef LoaderBuilder = Widget Function(BuildContext context, double? progress);
 
 class Preloader extends StatefulWidget {
   final List<Reference>? firebaseRefs;
@@ -13,16 +12,18 @@ class Preloader extends StatefulWidget {
   final Widget child;
   final ErrorEvent? onError;
   final SuccessEvent? onSuccess;
+  final LoaderBuilder? loader;
 
   const Preloader({
-    Key? key,
+    super.key,
     this.firebaseRefs,
     this.imageAssets,
     this.imageUrls,
     required this.child,
     this.onError,
     this.onSuccess,
-  }) : super(key: key);
+    this.loader,
+  });
 
   @override
   State<Preloader> createState() => _PreloaderState();
@@ -101,9 +102,11 @@ class _PreloaderState extends State<Preloader> {
     preload();
     if (_showLoader) {
       double? progressIndicator = (_total == 0) ? null : _finished / _total;
-      return ProgressIndicator(
-        value: progressIndicator,
-      );
+      return widget.loader != null
+          ? widget.loader!(context, progressIndicator)
+          : ProgressIndicator(
+              value: progressIndicator,
+            );
     } else {
       if (widget.onSuccess != null) {
         widget.onSuccess!();
