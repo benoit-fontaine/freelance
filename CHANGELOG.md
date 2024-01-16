@@ -1,4 +1,4 @@
-## 1.0.0+6
+## 1.0.0+7
 
 * Première version du package
 * Ensemble d'extensions disponibles :

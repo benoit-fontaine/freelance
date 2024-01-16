@@ -1,8 +1,16 @@
 name: freelance
 description: Plugin Flutter qui contient l'ensemble de mes outils de réalisation d'application web et mobile.
-version: 1.0.0+6
+version: 1.0.0+7
 homepage: https://freelance.benoitfontaine.fr/
 repository: https://github.com/benoit-fontaine/freelance
+
+platforms:
+    android:
+    ios:
+    linux:
+    macos:
+    web:
+    windows:
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
