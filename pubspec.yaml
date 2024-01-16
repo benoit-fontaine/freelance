@@ -1,37 +1,38 @@
 name: freelance
 description: Plugin Flutter qui contient l'ensemble de mes outils de réalisation d'application web et mobile.
-version: 1.0.0+1
+version: 1.0.0+6
 homepage: https://freelance.benoitfontaine.fr/
+repository: https://github.com/benoit-fontaine/freelance
 
 environment:
   sdk: '>=3.0.5'
   flutter: ">=3.10.5"
 
 dependencies:
-  animations: ^2.0.10
+  animations: ^2.0.11
   animator: ^3.3.0
   bloc: ^8.1.2
   equatable: ^2.0.5
-  firebase_storage: ^11.5.6
+  firebase_storage: ^11.6.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.3
-  flutter_markdown: ^0.6.18+2
+  flutter_markdown: ^0.6.18+3
   flutter_web_plugins:
     sdk: flutter
-  plugin_platform_interface: ^2.1.7
-  url_launcher: ^6.2.2
-  go_router: ^13.0.0
+  plugin_platform_interface: ^2.1.8
+  url_launcher: ^6.2.3
+  go_router: ^13.0.1
   nil: ^1.1.1 
   intl: ^0.18.1 # ne pas mettre à jour pour le moment
-  get_it: ^7.6.4
+  get_it: ^7.6.6
   widgetbook: ^3.7.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.1
-  build_runner: ^2.4.7
+  build_runner: ^2.4.8
   bdd_widget_test: ^1.6.3
 
 flutter:
