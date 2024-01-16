@@ -1,9 +1,9 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:freelance_package/components/landing_page.dart';
 import 'package:widgetbook/widgetbook.dart';
-import 'package:flutter_web_plugins/url_strategy.dart';
 
 import 'components/widgetbook.dart';
 import 'usecase_with_markdown.dart';
@@ -14,7 +14,7 @@ void main() {
 }
 
 class HotReload extends StatelessWidget {
-  const HotReload({Key? key}) : super(key: key);
+  const HotReload({super.key});
 
   @override
   Widget build(BuildContext context) {
