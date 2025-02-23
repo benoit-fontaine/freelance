@@ -1,3 +1,12 @@
+## 1.1.0
+
+* Mise à jour des packages
+* Préparation du code pour une mise à jour majeure
+
+## 1.0.2
+
+* Mise à jour des packages
+
 ## 1.0.0+7
 
 * Première version du package
